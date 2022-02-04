@@ -26,8 +26,21 @@ f = open(newFile, 'w')
 
 # This loop takes all input in from the read file, exports it to the write file
 # Used this for testing, will prob delete later but you might find it interesting to play with.
+'''for line in lines:
+    f.write(line)'''
+
+# This saves all the times and exports them to the file
+# Might be useless but it could help for reference, maybe.
+# If it is useful, we can definitely clean it up
+times = []
+i = 0
 for line in lines:
-    f.write(line)
+    for x in range(len(line)):
+        if (line[x] == '@'):
+            times.append(line[x:x+6])
+            i += 1
+for t in times:
+    f.write(t + "\n")
 
 # We need to close the file in order for the program to stop
 f.close()
