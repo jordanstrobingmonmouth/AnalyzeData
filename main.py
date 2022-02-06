@@ -57,16 +57,35 @@ placeName = placeName + '='
 
 # This makes it so that the only thing that prints is the place chosen and how many tokens it has
 # Tracks place as long as it has 1 or more tokens
-# For later, need to get the times to show up and concatenate them
+# For later, need to get the times to show up and concatenate them (done)
+ind = 0
+lastChange = ""
+n = "n"
 for line in lines:
     if placeName in line:
-        n = re.search(r'%s.*[^,]*' % placeName, line)
-        t = re.search(r'@.*[^\s]*', line)
-        n.group()
-        t.group()
-        head, sep, tail = n.group().partition(',')
-        timehead, timesep, timetail = t.group().partition(' ')
-        f.write(timehead + " " + head + "\n")
+        if re.search(r'\s%s.*[^,]*' % placeName, line):
+            n = re.search(r'\s%s.*[^,]*' % placeName, line)
+            t = re.search(r'@.*[^\s]*', line)
+            n.group()
+            t.group()
+            head, sep, tail = n.group().partition(',')
+            timehead, timesep, timetail = t.group().partition(' ')
+            if lastChange != head:
+                f.write(timehead + " " + head + "\n")
+                print(timehead + " " + head + "\n")
+                lastChange = head
+        if re.search(r'\s%s.*=1[^,]*' % placeName, line):
+            ind = line
+
+
+print(ind)
+
+if lines.__contains__(ind):
+    print('true')
+else:
+    print("false")
+
+print(lines[lines.index(ind)+1])
 
 # We need to close the file in order for the program to stop
 f.close()
