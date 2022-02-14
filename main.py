@@ -85,12 +85,12 @@ for line in lines:
             ind = line
             if choice == choices[0]:
                 # Code for repeats:
-                f.write(timehead + " " + head + "\n")
+                f.write(timehead[1:] + " " + head + "\n")
                 #print(timehead + " " + head + "\n")
             # This is code to not have repeats, but we might want repeats
             else:
                 if lastChange != head:
-                    f.write(timehead + " " + head + "\n")
+                    f.write(timehead[1:] + " " + head + "\n")
                     #print(timehead + " " + head + "\n")
                     lastChange = head
         #if re.search(r'\s%s.*=[^,]*' % placeName, line):
